@@ -5,10 +5,10 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import { MainStackScreenProps } from '../router/routes';
 // import { AppleButton, appleAuth } from '@invertase/react-native-apple-authentication';
 
-import auth from '@react-native-firebase/auth';
+// import auth from '@react-native-firebase/auth';
 // import { LoginManager, AccessToken } from 'react-native-fbsdk-next';
 // import { GoogleSignin, GoogleSigninButton } from '@react-native-google-signin/google-signin';
-import firebase from '../firebaseConfig';
+// import firebase from '../firebaseConfig';
 // import * as Crypto from "expo-crypto";
 // import * as AppleAuthentication from "expo-apple-authentication";
 
