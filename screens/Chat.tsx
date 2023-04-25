@@ -1,27 +1,80 @@
 import React, { useState } from 'react';
-import { View, Text, TextInput, Button, FlatList, StyleSheet } from 'react-native';
+import { View, Text, StatusBar, TextInput, Button, FlatList, StyleSheet, TouchableOpacity } from 'react-native';
 
-const Chat = () => {
+import Entypo from 'react-native-vector-icons/Entypo';
+import { COLOURS } from '../database/Database';
+import { MainStackScreenProps } from '../router/routes';
+import Message from '../components/Message';
+
+const Chat = ({ route, navigation }: MainStackScreenProps<'Chat'>) => {
   const [messages, setMessages] = useState<any>([]);
   const [newMessage, setNewMessage] = useState('');
 
   const handleSubmit = () => {
-    setMessages([...messages, newMessage]);
+    setMessages([{isMe: Math.random() * 10 > 5,  message:newMessage }, ]);
     setNewMessage('');
   };
 
   return (
-    <View style={styles.container}>
+    <View
+      style={{
+        width: '100%',
+        height: '100%',
+        backgroundColor: COLOURS.paleGrey,
+      }}
+    >
+      <StatusBar backgroundColor={COLOURS.paleGrey} barStyle="dark-content" />
+
+      <View
+        style={{
+          backgroundColor: 'white',
+          flexDirection: 'row',
+          alignItems: 'center',
+        }}
+      >
+
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Entypo
+            name="chevron-left"
+            style={{
+              fontSize: 16,
+              color: COLOURS.darkGrey,
+              padding: 10,
+              backgroundColor: COLOURS.white,
+              borderRadius: 50,
+            }}
+          />
+        </TouchableOpacity>
+        <Text
+          style={{
+            fontSize: 48,
+            color: COLOURS.black,
+            fontWeight: '900',
+          }}
+        >
+          Messages
+        </Text>
+      </View>
+
+
+
       <FlatList
+      inverted
+        style={{
+          flex: 1,
+          padding: 10,
+
+        }}
         data={messages}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => <Text style={styles.message}>{item}</Text>}
+        renderItem={data => <Message data={data.item} />}
       />
+
       <View style={styles.form}>
         <TextInput style={styles.input} value={newMessage} onChangeText={setNewMessage} />
         <Button title="Send" onPress={handleSubmit} />
       </View>
-    </View>
+
+    </View >
   );
 };
 
