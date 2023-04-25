@@ -4,6 +4,8 @@ import { CompositeScreenProps } from '@react-navigation/native';
 import { Item } from '../models/Item';
 
 export type MainStackParamList = {
+  OnBoarding: undefined;
+  LogIn: undefined;
   Settings: undefined;
   HomeTabs: undefined;
   Product: { product: Item };
