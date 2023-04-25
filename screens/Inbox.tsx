@@ -3,9 +3,19 @@ import { View, Text, StatusBar, StyleSheet, ScrollView, TouchableOpacity } from 
 import { COLOURS, Items, Brands } from '../database/Database';
 import { Button, SearchBar } from 'react-native-elements';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import ScrollCard from '../components/ScrollCard';
+import ConverstionElem from '../components/Converstaion';
 import Chat from './Chat';
 import { HomeTabsScreenProps } from '../router/routes';
+import { FlatList } from 'react-native';
+import Entypo from 'react-native-vector-icons/Entypo';
+
+const convs = [
+  { avatar: 'https://avatars.githubusercontent.com/u/131432648?s=64&v=4', fullname: 'sddds', time: 'now', message: 'There are no major defects or damages. Only tiny scratches' },
+  { avatar: 'https://avatars.githubusercontent.com/u/131432648?s=64&v=4', fullname: 'sdf', time: '3m ago', message: 'There are no major defects or damages. Only tiny scratches' },
+  { avatar: 'https://avatars.githubusercontent.com/u/131432648?s=64&v=4', fullname: 'gge', time: '2h ago', message: 'There are no major defects or damages. Only tiny scratches' },
+  { avatar: 'https://avatars.githubusercontent.com/u/131432648?s=64&v=4', fullname: 'beffg', time: '9h ago', message: 'There are no major defects or damages. Only tiny scratches' },
+  { avatar: 'https://avatars.githubusercontent.com/u/131432648?s=64&v=4', fullname: 'lwkekf', time: 'past', message: 'There are no major defects or damages. Only tiny scratches' },
+];
 
 const Inbox = ({ navigation }: HomeTabsScreenProps<'Inbox'>) => {
   return (
@@ -22,12 +32,15 @@ const Inbox = ({ navigation }: HomeTabsScreenProps<'Inbox'>) => {
         <View
           style={{
             marginHorizontal: '5%',
-            marginVertical: '10%',
+            marginTop: '10%',
+            marginBottom: '5%',
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between',
           }}
         >
+         
+
           <Text
             style={{
               fontSize: 48,
@@ -74,16 +87,14 @@ const Inbox = ({ navigation }: HomeTabsScreenProps<'Inbox'>) => {
           />
         </View>
 
-        <View
-          style={{
-            flexDirection: 'row',
-            alignItems: 'center',
-            paddingLeft: '5%',
-            paddingTop: '5%',
-          }}
-        >
-          <Button title="CHAT" onPress={() => navigation.navigate('Chat')} />
-        </View>
+        <FlatList
+          data={convs}
+          renderItem={data => <ConverstionElem
+            data={data.item}
+            onPress={(id) => navigation.navigate('Chat')}
+          />}
+        />
+
       </ScrollView>
     </View>
   );

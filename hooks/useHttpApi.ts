@@ -1,6 +1,7 @@
 import sanitizeUrlParams from '../utils/sanitizeUrlParams';
 import axios, { AxiosError } from 'axios';
-import Config from 'react-native-config';
+
+const API_URL="http://65.108.20.232:4000/v0";
 
 interface ApiCallMethods {
   apiGet: <T>(url: string, queryParams?: { [x: string]: any }) => Promise<T>;
@@ -58,8 +59,9 @@ export default function useHttpApi(): ApiCallMethods {
         Authorization: `Bearer ${token}`,
       };
     }
+    const api_url = `${API_URL}${url}${q}`;
     return axios
-      .get<T>(`${Config.API_URL}${url}${q}`, {
+      .get<T>(api_url, {
         headers,
       })
       .then((response) => {
@@ -108,7 +110,7 @@ export default function useHttpApi(): ApiCallMethods {
       };
     }
     return axios
-      .post<T>(`${Config.API_URL}${url}`, data, {
+      .post<T>(`${API_URL}${url}`, data, {
         headers,
       })
       .then((response) => response.data)
@@ -149,7 +151,7 @@ export default function useHttpApi(): ApiCallMethods {
       };
     }
     return axios
-      .put<T>(`${Config.API_URL}${url}`, data, {
+      .put<T>(`${API_URL}${url}`, data, {
         headers,
       })
       .then((response) => response.data)
@@ -190,7 +192,7 @@ export default function useHttpApi(): ApiCallMethods {
       };
     }
     return axios
-      .delete<T>(`${Config.API_URL}${url}`, {
+      .delete<T>(`${API_URL}${url}`, {
         headers,
       })
       .then((response) => response.data)
